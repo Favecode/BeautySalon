@@ -1,17 +1,17 @@
-import { BLOGS, REVIEWS, SERVICES, STORY_IMGS } from "../constants";
+import { BLOGS, NIGERIAN_IMAGES, REVIEWS, SERVICES, STORY_IMGS } from "../constants";
 import Footer from "../components/Footer";
 
 function HomePage({ navigate }) {
   return (
     <div className="gh-page">
-      <section className="relative min-h-[92vh] overflow-hidden bg-ink text-white">
+      <section className="relative min-h-screen overflow-hidden bg-ink text-white sm:min-h-[92vh]">
         <img
-          src="https://images.unsplash.com/photo-1470259078422-826894b933aa?w=1800&q=85"
-          alt="Beauty salon treatment room"
+          src={NIGERIAN_IMAGES.hero}
+          alt="Nigerian beauty portrait"
           className="absolute inset-0 h-full w-full object-cover opacity-70"
         />
         <div className="absolute inset-0 bg-[linear-gradient(90deg,rgba(25,23,22,0.82),rgba(25,23,22,0.42),rgba(25,23,22,0.18))]" />
-        <div className="gh-container relative flex min-h-[92vh] items-center pt-20">
+        <div className="gh-container relative flex min-h-screen items-center pt-20 sm:min-h-[92vh]">
           <div className="max-w-2xl py-20">
             <p className="gh-eyebrow text-blush">Premium Beauty Studio</p>
             <h1 className="mt-5 font-serif text-5xl font-bold leading-tight sm:text-6xl lg:text-7xl">
@@ -32,7 +32,7 @@ function HomePage({ navigate }) {
         </div>
       </section>
 
-      <section className="bg-ink py-8 text-white">
+      <section className="hidden bg-ink py-8 text-white sm:block">
         <div className="gh-container grid gap-5 text-center sm:grid-cols-2 lg:grid-cols-4">
           {[["2,400+", "Happy Clients"], ["8", "Expert Stylists"], ["10+", "Years of Excellence"], ["15", "Beauty Services"]].map(([number, label]) => (
             <div key={label} className="rounded-2xl border border-white/10 bg-white/5 p-5">

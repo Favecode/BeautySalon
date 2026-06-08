@@ -19,7 +19,7 @@ export default function App() {
   const transparent = page === "home";
 
   return (
-    <>
+    <div className="min-h-screen">
       {!noNavbar && (
         <Navbar page={page} navigate={navigate} transparent={transparent} />
       )}
@@ -31,6 +31,6 @@ export default function App() {
         {page === "contact" && <ContactPage navigate={navigate} />}
         {page === "login" && <LoginPage navigate={navigate} />}
       </main>
-    </>
+    </div>
   );
 }

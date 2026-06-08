@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { NIGERIAN_IMAGES } from "../constants";
 
 function LoginPage({ navigate }) {
   const [email, setEmail] = useState("");
@@ -20,8 +21,8 @@ function LoginPage({ navigate }) {
     <div className="gh-page grid min-h-screen bg-cream lg:grid-cols-[1.1fr_0.9fr]">
       <section className="relative hidden overflow-hidden bg-ink p-12 text-white lg:flex lg:flex-col lg:justify-end">
         <img
-          src="https://images.unsplash.com/photo-1560066984-138daaa0a74d?w=1200&q=85"
-          alt="Salon styling"
+          src={NIGERIAN_IMAGES.makeupSession}
+          alt="Nigerian salon makeup session"
           className="absolute inset-0 h-full w-full object-cover opacity-75"
         />
         <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(25,23,22,0.84),rgba(25,23,22,0.25))]" />
