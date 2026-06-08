@@ -29,7 +29,7 @@ function HomePage({ navigate }) {
       </section>
 
       {/* Stats bar */}
-      <div style={{ background: DARK, padding: "22px 0" }}>
+      <div className="gh-hide-on-mobile" style={{ background: DARK, padding: "22px 0" }}>
         <div className="gh-container" style={{ display: "grid", gridTemplateColumns: "repeat(4, 1fr)", gap: 16, textAlign: "center" }}>
           {[["2,400+", "Happy Clients"], ["8", "Expert Stylists"], ["10+", "Years of Excellence"], ["15", "Beauty Services"]].map(([n, l]) => (
             <div key={l}>

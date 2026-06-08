@@ -149,6 +149,7 @@ const GLOBAL_CSS = `
     .gh-grid-4    { grid-template-columns: 1fr 1fr; gap: 10px; }
     .gh-grid-3    { grid-template-columns: 1fr; }
     .gh-grid-2    { grid-template-columns: 1fr; }
+    .gh-hide-on-mobile { display: none !important; }
     .gh-hero-content { padding-left: 20px !important; padding-right: 20px !important; padding-top: 60px !important; }
     .gh-hero-content h1 { font-size: 28px !important; }
     .gh-story-imgs { grid-template-columns: repeat(2,1fr) !important; }
@@ -158,8 +159,8 @@ const GLOBAL_CSS = `
     .gh-blog-grid     { grid-template-columns: 1fr !important; }
     .gh-reviews-grid  { grid-template-columns: 1fr !important; }
     .gh-about-values  { grid-template-columns: 1fr !important; }
-    .gh-section-title { font-size: 24px !important; }
-    .gh-hero { height: 320px !important; }
+    .gh-section-title { font-size: 24px !important; } 
+    .gh-hero { height: 100vh !important; } 
   }
 
   /* Navbar transparent → solid on scroll handled via class */
