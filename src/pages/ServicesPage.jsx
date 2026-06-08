@@ -42,18 +42,18 @@ function ServicesPage({ navigate }) {
       {/* Why us */}
       <section className="gh-section" style={{ background: "#fafafa" }}>
         <div className="gh-container">
-          <div style={{ textAlign: "center", marginBottom: 36 }}>
+          <div style={{ textAlign: "center", marginBottom: 40 }}>
             <div className="gh-label" style={{ justifyContent: "center" }}>Why GlowHaven</div>
             <h2 className="gh-section-title" style={{ fontSize: 28, fontWeight: "bold" }}>The GlowHaven Difference</h2>
           </div>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(3,1fr)", gap: 20 }}>
+          <div className="gh-services-values" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
             {[
               ["🏆", "Certified Professionals", "Every specialist is certified and undergoes regular advanced training."],
               ["🌿", "Premium Products Only", "We use carefully curated, skin-safe products from trusted global brands."],
               ["⏰", "Flexible Booking", "Early morning and late evening slots available 6 days a week."],
             ].map(([ic, t, d]) => (
               <div key={t} style={{ textAlign: "center", padding: "28px 20px", background: "#fff", border: "1px solid #f0e8e8", borderRadius: 12 }}>
-                <div style={{ fontSize: 30, marginBottom: 12 }}>{ic}</div>
+                <div style={{ fontSize: 32, marginBottom: 14 }}>{ic}</div>
                 <p style={{ fontWeight: "bold", fontSize: 15, marginBottom: 8 }}>{t}</p>
                 <p style={{ fontSize: 13, color: "#777", lineHeight: 1.7, fontFamily: "sans-serif" }}>{d}</p>
               </div>

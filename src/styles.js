@@ -158,7 +158,7 @@ const GLOBAL_CSS = `
     .gh-team-grid     { grid-template-columns: 1fr !important; }
     .gh-blog-grid     { grid-template-columns: 1fr !important; }
     .gh-reviews-grid  { grid-template-columns: 1fr !important; }
-    .gh-about-values  { grid-template-columns: 1fr !important; }
+    .gh-about-values, .gh-services-values  { grid-template-columns: 1fr !important; }
     .gh-section-title { font-size: 24px !important; } 
     .gh-hero { height: 100vh !important; } 
   }
