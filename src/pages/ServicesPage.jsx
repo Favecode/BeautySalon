@@ -1,62 +1,59 @@
-import React from "react";
-import { DARK, PINK } from "../styles";
 import { SERVICES } from "../constants";
 import Footer from "../components/Footer";
 
-// ═══════════════════════════════════════════════════════════════════
-// PAGE: Services
-// ═══════════════════════════════════════════════════════════════════
+function PageHero() {
+  return (
+    <header className="bg-ink py-20 text-center text-white">
+      <div className="gh-container">
+        <p className="gh-eyebrow justify-center text-blush">What We Offer</p>
+        <h1 className="mt-4 font-serif text-5xl font-bold">Our Services</h1>
+        <p className="mx-auto mt-5 max-w-2xl leading-8 text-white/65">
+          Every service is designed to feel calm, polished, and personal, from quick refresh treatments to full-day luxury packages.
+        </p>
+      </div>
+    </header>
+  );
+}
+
 function ServicesPage({ navigate }) {
   return (
     <div className="gh-page">
-      <div style={{ background: DARK, paddingTop: 100, paddingBottom: 60, textAlign: "center" }}>
-        <div className="gh-container">
-          <div className="gh-label" style={{ justifyContent: "center" }}>What We Offer</div>
-          <h1 style={{ color: "#fff", fontSize: 38, fontWeight: "bold", marginBottom: 14 }}>Our Services</h1>
-          <p style={{ color: "#aaa", fontSize: 14, fontFamily: "sans-serif", maxWidth: 500, margin: "0 auto", lineHeight: 1.8 }}>
-            Every service is crafted to leave you looking and feeling extraordinary — from quick refresh treatments to full-day luxury packages.
-          </p>
-        </div>
-      </div>
+      <PageHero />
 
       <section className="gh-section">
-        <div className="gh-container">
-          <div className="gh-services-grid" style={{ display: "grid", gridTemplateColumns: "repeat(4,1fr)", gap: 16 }}>
-            {SERVICES.map((s) => (
-              <div key={s.label} className="gh-service-card" style={{ border: "1px solid #f0e8e8", borderRadius: 12 }}>
-                <div style={{ position: "relative" }}>
-                  <img src={s.img} alt={s.label} style={{ width: "100%", height: 170, objectFit: "cover", display: "block" }} />
-                </div>
-                <div style={{ padding: "16px 16px 20px" }}>
-                  <p style={{ fontWeight: "bold", fontSize: 15, marginBottom: 4 }}>{s.label}</p>
-                  <p style={{ color: PINK, fontSize: 14, fontFamily: "sans-serif", marginBottom: 8, fontWeight: "bold" }}>{s.price}</p>
-                  <p style={{ fontSize: 12, color: "#777", lineHeight: 1.7, fontFamily: "sans-serif", marginBottom: 14 }}>{s.desc}</p>
-                  <button className="gh-btn" style={{ width: "100%", fontSize: 12, padding: "9px" }} onClick={() => navigate("contact")}>Book Now</button>
-                </div>
+        <div className="gh-container grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
+          {SERVICES.map((service) => (
+            <article key={service.label} className="gh-service-card overflow-hidden rounded-3xl bg-white shadow-xl shadow-ink/5">
+              <div className="overflow-hidden">
+                <img src={service.img} alt={service.label} className="h-52 w-full object-cover" />
               </div>
-            ))}
-          </div>
+              <div className="p-5">
+                <p className="font-serif text-xl font-bold text-ink">{service.label}</p>
+                <p className="mt-1 text-sm font-bold text-blush-600">{service.price}</p>
+                <p className="mt-3 min-h-18 text-sm leading-6 text-ink/60">{service.desc}</p>
+                <button className="gh-btn mt-5 w-full" onClick={() => navigate("contact")}>Book Now</button>
+              </div>
+            </article>
+          ))}
         </div>
       </section>
 
-      {/* Why us */}
-      <section className="gh-section" style={{ background: "#fafafa" }}>
+      <section className="gh-section bg-blush-50">
         <div className="gh-container">
-          <div style={{ textAlign: "center", marginBottom: 40 }}>
-            <div className="gh-label" style={{ justifyContent: "center" }}>Why GlowHaven</div>
-            <h2 className="gh-section-title" style={{ fontSize: 28, fontWeight: "bold" }}>The GlowHaven Difference</h2>
+          <div className="mx-auto max-w-2xl text-center">
+            <p className="gh-eyebrow justify-center">Why GlowHaven</p>
+            <h2 className="mt-4 font-serif text-4xl font-bold text-ink">The GlowHaven Difference</h2>
           </div>
-          <div className="gh-services-values" style={{ display: "grid", gridTemplateColumns: "repeat(3, 1fr)", gap: 20 }}>
+          <div className="mt-10 grid gap-6 md:grid-cols-3">
             {[
-              ["🏆", "Certified Professionals", "Every specialist is certified and undergoes regular advanced training."],
-              ["🌿", "Premium Products Only", "We use carefully curated, skin-safe products from trusted global brands."],
-              ["⏰", "Flexible Booking", "Early morning and late evening slots available 6 days a week."],
-            ].map(([ic, t, d]) => (
-              <div key={t} style={{ textAlign: "center", padding: "28px 20px", background: "#fff", border: "1px solid #f0e8e8", borderRadius: 12 }}>
-                <div style={{ fontSize: 32, marginBottom: 14 }}>{ic}</div>
-                <p style={{ fontWeight: "bold", fontSize: 15, marginBottom: 8 }}>{t}</p>
-                <p style={{ fontSize: 13, color: "#777", lineHeight: 1.7, fontFamily: "sans-serif" }}>{d}</p>
-              </div>
+              ["Certified Professionals", "Every specialist is trained, certified, and mentored in advanced beauty techniques."],
+              ["Premium Products", "We choose skin-safe, salon-grade products that perform beautifully and feel gentle."],
+              ["Flexible Booking", "Morning, evening, and weekend appointments help beauty care fit your real schedule."],
+            ].map(([title, desc]) => (
+              <article key={title} className="gh-card rounded-3xl p-7 text-center">
+                <p className="font-serif text-2xl font-bold text-ink">{title}</p>
+                <p className="mt-3 leading-7 text-ink/60">{desc}</p>
+              </article>
             ))}
           </div>
         </div>

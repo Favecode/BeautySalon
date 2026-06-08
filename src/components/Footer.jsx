@@ -1,51 +1,49 @@
-import React from "react";
-import { PINK_LIGHT } from "../styles";
-
-// ═══════════════════════════════════════════════════════════════════
-// SHARED: Footer
-// ═══════════════════════════════════════════════════════════════════
 function Footer({ navigate }) {
   return (
-    <footer style={{ background: PINK_LIGHT, paddingTop: 52, paddingBottom: 24 }}>
-      <div className="gh-container">
-        <div className="gh-footer-grid" style={{ display: "grid", gridTemplateColumns: "1.6fr 1fr 1fr", gap: 44, marginBottom: 32 }}>
+    <footer className="bg-ink text-white">
+      <div className="gh-container py-12">
+        <div className="grid gap-10 md:grid-cols-[1.5fr_1fr_1fr]">
           <div>
-            <p style={{ fontWeight: "bold", fontSize: 20, marginBottom: 12, letterSpacing: 0.5 }}>✦ GlowHaven</p>
-            <p style={{ fontSize: 13, color: "#666", lineHeight: 1.85, maxWidth: 240, fontFamily: "sans-serif" }}>
-              Lagos's premier beauty studio for skincare, hair, makeup and holistic pampering. Beauty redefined, one client at a time.
+            <p className="font-serif text-2xl font-bold">GlowHaven</p>
+            <p className="mt-4 max-w-sm text-sm leading-7 text-white/65">
+              Lagos beauty studio for skincare, hair, makeup, nails, and restorative spa treatments.
             </p>
-            <div style={{ display: "flex", gap: 10, marginTop: 18 }}>
-              {["f", "𝕏", "📷"].map((ic) => (
-                <span key={ic} style={{ width: 34, height: 34, borderRadius: "50%", background: "#fff", border: "1.5px solid #eee", display: "flex", alignItems: "center", justifyContent: "center", cursor: "pointer", fontSize: 13, color: "#555" }}>{ic}</span>
+            <div className="mt-6 flex gap-3">
+              {["f", "x", "ig"].map((item) => (
+                <span
+                  key={item}
+                  className="grid h-10 w-10 place-items-center rounded-full border border-white/15 bg-white/5 text-xs font-bold uppercase text-white/70"
+                >
+                  {item}
+                </span>
               ))}
             </div>
           </div>
+
           <div>
-            <p style={{ fontWeight: "bold", fontSize: 14, marginBottom: 16, fontFamily: "sans-serif" }}>Contact Us</p>
-            {[
-              ["📍", "14 Beauty Blvd, Victoria Island, Lagos"],
-              ["✉️", "hello@glowhaven.com"],
-              ["📞", "+234 812 345 6789"],
-            ].map(([ic, txt]) => (
-              <div key={txt} style={{ display: "flex", gap: 10, marginBottom: 12, alignItems: "flex-start" }}>
-                <span style={{ fontSize: 14, flexShrink: 0 }}>{ic}</span>
-                <p style={{ fontSize: 12, color: "#555", lineHeight: 1.6, fontFamily: "sans-serif" }}>{txt}</p>
-              </div>
-            ))}
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-blush">Contact</p>
+            <div className="mt-5 space-y-3 text-sm leading-6 text-white/65">
+              <p>14 Beauty Boulevard, Victoria Island, Lagos</p>
+              <p>hello@glowhaven.com</p>
+              <p>+234 812 345 6789</p>
+            </div>
           </div>
+
           <div>
-            <p style={{ fontWeight: "bold", fontSize: 14, marginBottom: 16, fontFamily: "sans-serif" }}>Opening Hours</p>
-            {[["Mon – Wed", "11:00am – 7:00pm"], ["Thu – Sat", "10:00am – 8:00pm"], ["Sunday", "12:00pm – 6:00pm"]].map(([d, t]) => (
-              <div key={d} style={{ display: "flex", justifyContent: "space-between", marginBottom: 10 }}>
-                <p style={{ fontSize: 12, color: "#666", fontFamily: "sans-serif" }}>{d}</p>
-                <p style={{ fontSize: 12, color: "#333", fontWeight: "bold", fontFamily: "sans-serif" }}>{t}</p>
-              </div>
-            ))}
-            <button className="gh-btn" style={{ marginTop: 18, width: "100%", fontSize: 13 }} onClick={() => navigate("contact")}>Book Appointment</button>
+            <p className="text-sm font-bold uppercase tracking-[0.18em] text-blush">Hours</p>
+            <div className="mt-5 space-y-3 text-sm text-white/65">
+              <p className="flex justify-between gap-4"><span>Mon-Wed</span><span>11am-7pm</span></p>
+              <p className="flex justify-between gap-4"><span>Thu-Sat</span><span>10am-8pm</span></p>
+              <p className="flex justify-between gap-4"><span>Sunday</span><span>12pm-6pm</span></p>
+            </div>
+            <button className="gh-btn mt-6 w-full bg-white text-ink hover:bg-blush-100" onClick={() => navigate("contact")}>
+              Book Appointment
+            </button>
           </div>
         </div>
-        <div style={{ borderTop: "1px solid #f0d8d8", paddingTop: 16, textAlign: "center" }}>
-          <p style={{ fontSize: 12, color: "#bbb", fontFamily: "sans-serif" }}>© 2026 GlowHaven Beauty Studio · All rights reserved.</p>
+
+        <div className="mt-10 border-t border-white/10 pt-6 text-center text-xs text-white/45">
+          Copyright 2026 GlowHaven Beauty Studio. All rights reserved.
         </div>
       </div>
     </footer>

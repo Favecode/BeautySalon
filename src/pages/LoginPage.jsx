@@ -1,9 +1,5 @@
 import { useState } from "react";
-import { DARK, PINK } from "../styles";
 
-// ═══════════════════════════════════════════════════════════════════
-// PAGE: Login
-// ═══════════════════════════════════════════════════════════════════
 function LoginPage({ navigate }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -14,75 +10,106 @@ function LoginPage({ navigate }) {
   const submit = () => {
     if (!email || !password) return;
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSuccess(true); }, 1400);
+    setTimeout(() => {
+      setLoading(false);
+      setSuccess(true);
+    }, 900);
   };
 
   return (
-    <div className="gh-page" style={{ minHeight: "100vh", display: "flex" }}>
-      {/* Left image panel */}
-      <div className="gh-login-img-panel" style={{ flex: 1, position: "relative", overflow: "hidden", display: "flex", flexDirection: "column", justifyContent: "flex-end", padding: 48 }}>
-        <img src="https://images.unsplash.com/photo-1560066984-138daaa0a74d?w=900&q=80" alt="Salon" style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover" }} />
-        <div style={{ position: "absolute", inset: 0, background: "linear-gradient(to top, rgba(0,0,0,.75) 0%, rgba(0,0,0,.15) 60%)" }} />
-        <div style={{ position: "relative", zIndex: 1 }}>
-          <button onClick={() => navigate("home")} style={{ background: "none", border: "none", color: "#aaa", fontFamily: "sans-serif", fontSize: 13, cursor: "pointer", marginBottom: 32, padding: 0 }}>← Back to site</button>
-          <p style={{ color: PINK, fontFamily: "sans-serif", fontSize: 11, letterSpacing: 3, textTransform: "uppercase", marginBottom: 10 }}>Welcome Back</p>
-          <h2 style={{ color: "#fff", fontSize: 32, fontWeight: "bold", lineHeight: 1.2, marginBottom: 14 }}>Your beauty<br />journey continues.</h2>
-          <p style={{ color: "#ccc", fontSize: 13, fontFamily: "sans-serif", lineHeight: 1.7, maxWidth: 300 }}>Log in to manage appointments, explore member-exclusive offers, and stay up to date with your GlowHaven journey.</p>
+    <div className="gh-page grid min-h-screen bg-cream lg:grid-cols-[1.1fr_0.9fr]">
+      <section className="relative hidden overflow-hidden bg-ink p-12 text-white lg:flex lg:flex-col lg:justify-end">
+        <img
+          src="https://images.unsplash.com/photo-1560066984-138daaa0a74d?w=1200&q=85"
+          alt="Salon styling"
+          className="absolute inset-0 h-full w-full object-cover opacity-75"
+        />
+        <div className="absolute inset-0 bg-[linear-gradient(0deg,rgba(25,23,22,0.84),rgba(25,23,22,0.25))]" />
+        <div className="relative max-w-md">
+          <button onClick={() => navigate("home")} className="mb-10 text-sm font-bold text-white/65 hover:text-white">
+            Back to site
+          </button>
+          <p className="text-xs font-bold uppercase tracking-[0.24em] text-blush">Welcome Back</p>
+          <h1 className="mt-4 font-serif text-5xl font-bold leading-tight">Your beauty journey continues.</h1>
+          <p className="mt-5 leading-8 text-white/70">
+            Log in to manage appointments, browse member offers, and keep your GlowHaven plans in one place.
+          </p>
         </div>
-      </div>
+      </section>
 
-      {/* Right form panel */}
-      <div className="gh-login-form-panel" style={{ width: 460, background: "#fff", display: "flex", flexDirection: "column", justifyContent: "center", padding: "60px 48px" }}>
-        <button onClick={() => navigate("home")} style={{ display: "flex", alignItems: "center", gap: 6, background: "none", border: "none", cursor: "pointer", color: "#aaa", fontFamily: "sans-serif", fontSize: 13, marginBottom: 36, padding: 0 }}>← Back to site</button>
-        <p style={{ color: PINK, fontSize: 11, letterSpacing: 3, textTransform: "uppercase", fontFamily: "sans-serif", marginBottom: 6 }}>GlowHaven</p>
-        <h1 style={{ fontSize: 26, fontWeight: "bold", marginBottom: 6 }}>Sign in to your account</h1>
-        <p style={{ fontSize: 13, color: "#888", fontFamily: "sans-serif", marginBottom: 32 }}>
-          Don't have an account? <span style={{ color: PINK, cursor: "pointer", borderBottom: `1px solid ${PINK}` }}>Create one free</span>
-        </p>
+      <section className="flex items-center justify-center p-6 sm:p-10">
+        <div className="w-full max-w-md">
+          <button onClick={() => navigate("home")} className="mb-8 text-sm font-bold text-ink/45 hover:text-ink lg:hidden">
+            Back to site
+          </button>
+          <p className="gh-eyebrow">GlowHaven</p>
+          <h1 className="mt-4 font-serif text-4xl font-bold text-ink">Sign in to your account</h1>
+          <p className="mt-3 text-sm text-ink/55">
+            Do not have an account? <span className="font-bold text-blush-600">Create one free</span>
+          </p>
 
-        {success ? (
-          <div style={{ textAlign: "center", padding: "28px 0" }}>
-            <div style={{ fontSize: 48, marginBottom: 14 }}>✨</div>
-            <h3 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>Welcome back!</h3>
-            <p style={{ fontSize: 14, color: "#888", fontFamily: "sans-serif" }}>You're signed in to GlowHaven.</p>
-            <button className="gh-btn" style={{ marginTop: 22, width: "100%" }} onClick={() => navigate("home")}>Go to Homepage</button>
-          </div>
-        ) : (
-          <>
-            <div style={{ marginBottom: 16 }}>
-              <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 7 }}>Email address</label>
-              <input className="gh-input" type="email" placeholder="you@example.com" value={email} onChange={e => setEmail(e.target.value)} />
-            </div>
-            <div style={{ marginBottom: 8 }}>
-              <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 7 }}>Password</label>
-              <div style={{ position: "relative" }}>
-                <input className="gh-input" type={showPw ? "text" : "password"} placeholder="Enter your password" value={password} onChange={e => setPassword(e.target.value)} style={{ paddingRight: 44 }} />
-                <button onClick={() => setShowPw(v => !v)} style={{ position: "absolute", right: 12, top: "50%", transform: "translateY(-50%)", background: "none", border: "none", cursor: "pointer", fontSize: 16, color: "#bbb" }}>
-                  {showPw ? "🙈" : "👁️"}
-                </button>
+          <div className="gh-card mt-8 rounded-3xl p-6 sm:p-8">
+            {success ? (
+              <div className="py-8 text-center">
+                <p className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-blush-100 text-2xl font-bold text-blush-600">
+                  OK
+                </p>
+                <h2 className="mt-6 font-serif text-3xl font-bold text-ink">Welcome back</h2>
+                <p className="mt-3 text-ink/60">You are signed in to GlowHaven.</p>
+                <button className="gh-btn mt-7 w-full" onClick={() => navigate("home")}>Go Home</button>
               </div>
-            </div>
-            <div style={{ textAlign: "right", marginBottom: 26 }}>
-              <span style={{ fontSize: 13, color: PINK, cursor: "pointer", fontFamily: "sans-serif" }}>Forgot password?</span>
-            </div>
-            <button className="gh-btn" style={{ width: "100%", padding: "13px", fontSize: 15, borderRadius: 12, opacity: loading ? 0.75 : 1 }} onClick={submit} disabled={loading}>
-              {loading ? "Signing in…" : "Sign In"}
-            </button>
-            <div style={{ display: "flex", alignItems: "center", gap: 12, margin: "22px 0" }}>
-              <div style={{ flex: 1, height: 1, background: "#f0e8e8" }} />
-              <span style={{ fontSize: 12, color: "#ccc", fontFamily: "sans-serif" }}>or continue with</span>
-              <div style={{ flex: 1, height: 1, background: "#f0e8e8" }} />
-            </div>
-            <div style={{ display: "flex", gap: 10 }}>
-              {[["G", "Google"], ["f", "Facebook"], ["A", "Apple"]].map(([ic, nm]) => (
-                <button key={nm} style={{ flex: 1, padding: "10px 6px", border: "1.5px solid #eee", borderRadius: 10, background: "#fff", cursor: "pointer", fontSize: 13, fontFamily: "sans-serif", color: "#555" }}>
-                  {ic} {nm}
+            ) : (
+              <div className="space-y-5">
+                <label className="block">
+                  <span className="mb-2 block text-sm font-bold text-ink/75">Email address</span>
+                  <input className="gh-input" type="email" placeholder="you@example.com" value={email} onChange={(event) => setEmail(event.target.value)} />
+                </label>
+
+                <label className="block">
+                  <span className="mb-2 block text-sm font-bold text-ink/75">Password</span>
+                  <div className="relative">
+                    <input
+                      className="gh-input pr-24"
+                      type={showPw ? "text" : "password"}
+                      placeholder="Enter password"
+                      value={password}
+                      onChange={(event) => setPassword(event.target.value)}
+                    />
+                    <button
+                      onClick={() => setShowPw((value) => !value)}
+                      className="absolute right-3 top-1/2 -translate-y-1/2 rounded-full bg-blush-50 px-3 py-1 text-xs font-bold text-blush-600"
+                    >
+                      {showPw ? "Hide" : "Show"}
+                    </button>
+                  </div>
+                </label>
+
+                <div className="text-right">
+                  <span className="text-sm font-bold text-blush-600">Forgot password?</span>
+                </div>
+
+                <button className="gh-btn w-full rounded-2xl disabled:cursor-not-allowed disabled:opacity-60" onClick={submit} disabled={loading}>
+                  {loading ? "Signing in..." : "Sign In"}
                 </button>
-              ))}
-            </div>
-          </>
-        )}
-      </div>
+
+                <div className="flex items-center gap-3 py-2">
+                  <span className="h-px flex-1 bg-black/10" />
+                  <span className="text-xs font-bold uppercase tracking-[0.18em] text-ink/35">or</span>
+                  <span className="h-px flex-1 bg-black/10" />
+                </div>
+
+                <div className="grid grid-cols-3 gap-3">
+                  {["Google", "Facebook", "Apple"].map((provider) => (
+                    <button key={provider} className="rounded-2xl border border-black/10 bg-white px-3 py-3 text-xs font-bold text-ink/65 hover:bg-blush-50">
+                      {provider}
+                    </button>
+                  ))}
+                </div>
+              </div>
+            )}
+          </div>
+        </div>
+      </section>
     </div>
   );
 }

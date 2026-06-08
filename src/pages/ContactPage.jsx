@@ -1,11 +1,7 @@
 import { useState } from "react";
-import { DARK, PINK_LIGHT, PINK } from "../styles";
 import { SERVICES } from "../constants";
 import Footer from "../components/Footer";
 
-// ═══════════════════════════════════════════════════════════════════
-// PAGE: Contact Us
-// ═══════════════════════════════════════════════════════════════════
 function ContactPage({ navigate }) {
   const [form, setForm] = useState({ name: "", email: "", service: "", message: "" });
   const [sent, setSent] = useState(false);
@@ -14,89 +10,105 @@ function ContactPage({ navigate }) {
   const submit = () => {
     if (!form.name || !form.email) return;
     setLoading(true);
-    setTimeout(() => { setLoading(false); setSent(true); }, 1500);
+    setTimeout(() => {
+      setLoading(false);
+      setSent(true);
+    }, 1000);
   };
+
+  const update = (key, value) => setForm((current) => ({ ...current, [key]: value }));
 
   return (
     <div className="gh-page">
-      <div style={{ background: DARK, paddingTop: 100, paddingBottom: 60, textAlign: "center" }}>
+      <header className="bg-ink py-20 text-center text-white">
         <div className="gh-container">
-          <div className="gh-label" style={{ justifyContent: "center" }}>Get in Touch</div>
-          <h1 style={{ color: "#fff", fontSize: 38, fontWeight: "bold", marginBottom: 14 }}>Contact Us</h1>
-          <p style={{ color: "#aaa", fontSize: 14, fontFamily: "sans-serif", maxWidth: 460, margin: "0 auto", lineHeight: 1.8 }}>
-            Ready to book your next treatment or have a question? We'd love to hear from you.
+          <p className="gh-eyebrow justify-center text-blush">Get in Touch</p>
+          <h1 className="mt-4 font-serif text-5xl font-bold">Contact Us</h1>
+          <p className="mx-auto mt-5 max-w-2xl leading-8 text-white/65">
+            Ready to book your next treatment or ask a question? We would love to hear from you.
           </p>
         </div>
-      </div>
+      </header>
 
       <section className="gh-section">
-        <div className="gh-container">
-          <div className="gh-contact-layout" style={{ display: "flex", gap: 56, alignItems: "flex-start" }}>
-            {/* Info */}
-            <div style={{ flex: 1 }}>
-              <div className="gh-label">Our Details</div>
-              <h2 className="gh-section-title" style={{ fontSize: 26, fontWeight: "bold", marginBottom: 24 }}>Visit Us or Send a Message</h2>
+        <div className="gh-container grid gap-10 lg:grid-cols-[0.85fr_1.15fr]">
+          <aside>
+            <p className="gh-eyebrow">Our Details</p>
+            <h2 className="mt-4 font-serif text-4xl font-bold text-ink">Visit us or send a message.</h2>
+            <div className="mt-8 space-y-5">
               {[
-                ["📍", "Location", "14 Beauty Boulevard, Victoria Island, Lagos, Nigeria"],
-                ["📞", "Phone", "+234 812 345 6789"],
-                ["✉️", "Email", "hello@glowhaven.com"],
-                ["🕐", "Opening Hours", "Mon–Wed: 11am–7pm · Thu–Sat: 10am–8pm · Sun: 12pm–6pm"],
-              ].map(([ic, t, d]) => (
-                <div key={t} style={{ display: "flex", gap: 16, marginBottom: 22 }}>
-                  <div style={{ width: 44, height: 44, borderRadius: "50%", background: PINK_LIGHT, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 18, flexShrink: 0 }}>{ic}</div>
-                  <div>
-                    <p style={{ fontWeight: "bold", fontSize: 14, marginBottom: 3 }}>{t}</p>
-                    <p style={{ fontSize: 13, color: "#666", fontFamily: "sans-serif", lineHeight: 1.6 }}>{d}</p>
-                  </div>
+                ["Location", "14 Beauty Boulevard, Victoria Island, Lagos, Nigeria"],
+                ["Phone", "+234 812 345 6789"],
+                ["Email", "hello@glowhaven.com"],
+                ["Opening Hours", "Mon-Wed: 11am-7pm. Thu-Sat: 10am-8pm. Sun: 12pm-6pm."],
+              ].map(([title, desc]) => (
+                <div key={title} className="gh-card rounded-3xl p-5">
+                  <p className="font-serif text-xl font-bold text-ink">{title}</p>
+                  <p className="mt-2 leading-7 text-ink/60">{desc}</p>
                 </div>
               ))}
-              {/* Map placeholder */}
-              <div style={{ borderRadius: 12, overflow: "hidden", border: "1px solid #f0e8e8", marginTop: 8 }}>
-                <img src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=600&q=80" alt="Map" style={{ width: "100%", height: 200, objectFit: "cover", display: "block" }} />
-              </div>
             </div>
+            <img
+              src="https://images.unsplash.com/photo-1526778548025-fa2f459cd5ce?w=900&q=80"
+              alt="Lagos location"
+              className="mt-6 h-56 w-full rounded-3xl object-cover shadow-xl shadow-ink/10"
+            />
+          </aside>
 
-            {/* Form */}
-            <div style={{ flex: 1 }}>
-              <div className="gh-label">Book / Enquire</div>
-              <h2 className="gh-section-title" style={{ fontSize: 26, fontWeight: "bold", marginBottom: 24 }}>Send Us a Message</h2>
-              {sent ? (
-                <div style={{ textAlign: "center", padding: "48px 0" }}>
-                  <div style={{ fontSize: 52, marginBottom: 16 }}>✨</div>
-                  <h3 style={{ fontSize: 20, fontWeight: "bold", marginBottom: 8 }}>Message Received!</h3>
-                  <p style={{ fontSize: 14, color: "#888", fontFamily: "sans-serif" }}>We'll be in touch within 24 hours. Can't wait to see you!</p>
-                  <button className="gh-btn" style={{ marginTop: 24 }} onClick={() => setSent(false)}>Send Another</button>
+          <section className="gh-card rounded-3xl p-6 sm:p-8">
+            <p className="gh-eyebrow">Book / Enquire</p>
+            <h2 className="mt-4 font-serif text-4xl font-bold text-ink">Send Us a Message</h2>
+
+            {sent ? (
+              <div className="py-14 text-center">
+                <p className="mx-auto grid h-16 w-16 place-items-center rounded-full bg-blush-100 text-2xl font-bold text-blush-600">
+                  OK
+                </p>
+                <h3 className="mt-6 font-serif text-3xl font-bold text-ink">Message Received</h3>
+                <p className="mx-auto mt-3 max-w-md leading-7 text-ink/60">
+                  We will be in touch within 24 hours. We cannot wait to welcome you.
+                </p>
+                <button className="gh-btn mt-7" onClick={() => setSent(false)}>Send Another</button>
+              </div>
+            ) : (
+              <div className="mt-8 space-y-5">
+                <div className="grid gap-5 sm:grid-cols-2">
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-ink/75">Full Name *</span>
+                    <input className="gh-input" placeholder="Your name" value={form.name} onChange={(event) => update("name", event.target.value)} />
+                  </label>
+                  <label className="block">
+                    <span className="mb-2 block text-sm font-bold text-ink/75">Email Address *</span>
+                    <input className="gh-input" type="email" placeholder="you@email.com" value={form.email} onChange={(event) => update("email", event.target.value)} />
+                  </label>
                 </div>
-              ) : (
-                <div style={{ display: "flex", flexDirection: "column", gap: 16 }}>
-                  <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 14 }}>
-                    <div>
-                      <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 6 }}>Full Name *</label>
-                      <input className="gh-input" placeholder="Your name" value={form.name} onChange={e=>setForm({...form,name:e.target.value})} />
-                    </div>
-                    <div>
-                      <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 6 }}>Email Address *</label>
-                      <input className="gh-input" type="email" placeholder="you@email.com" value={form.email} onChange={e=>setForm({...form,email:e.target.value})} />
-                    </div>
-                  </div>
-                  <div>
-                    <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 6 }}>Service of Interest</label>
-                    <select className="gh-input" value={form.service} onChange={e=>setForm({...form,service:e.target.value})} style={{ appearance: "auto" }}>
-                      <option value="">Select a service…</option>
-                      {SERVICES.map(s=><option key={s.label}>{s.label}</option>)}
-                    </select>
-                  </div>
-                  <div>
-                    <label style={{ fontSize: 13, fontFamily: "sans-serif", color: "#444", display: "block", marginBottom: 6 }}>Message</label>
-                    <textarea className="gh-textarea" placeholder="Tell us about your appointment or enquiry…" value={form.message} onChange={e=>setForm({...form,message:e.target.value})} />
-                  </div>
-                  <button className="gh-btn" style={{ padding: "13px", fontSize: 15, borderRadius: 12, opacity: loading ? 0.75 : 1 }} onClick={submit} disabled={loading}>
-                    {loading ? "Sending…" : "Send Message"}
-                  </button>
-                </div>
-              )}
-            </div>
-          </div>
+
+                <label className="block">
+                  <span className="mb-2 block text-sm font-bold text-ink/75">Service of Interest</span>
+                  <select className="gh-input" value={form.service} onChange={(event) => update("service", event.target.value)}>
+                    <option value="">Select a service</option>
+                    {SERVICES.map((service) => (
+                      <option key={service.label}>{service.label}</option>
+                    ))}
+                  </select>
+                </label>
+
+                <label className="block">
+                  <span className="mb-2 block text-sm font-bold text-ink/75">Message</span>
+                  <textarea
+                    className="gh-input min-h-36 resize-y"
+                    placeholder="Tell us about your appointment or enquiry"
+                    value={form.message}
+                    onChange={(event) => update("message", event.target.value)}
+                  />
+                </label>
+
+                <button className="gh-btn w-full rounded-2xl disabled:cursor-not-allowed disabled:opacity-60" onClick={submit} disabled={loading}>
+                  {loading ? "Sending..." : "Send Message"}
+                </button>
+              </div>
+            )}
+          </section>
         </div>
       </section>
 

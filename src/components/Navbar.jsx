@@ -1,88 +1,125 @@
-import { useState, useEffect } from "react";
-import { PINK, DARK, PINK_LIGHT } from "../styles";
+import { useEffect, useState } from "react";
 import { NAV_PAGES, PAGE_KEYS } from "../constants";
 
-// ═══════════════════════════════════════════════════════════════════
-// SHARED: Navbar
-// ═══════════════════════════════════════════════════════════════════
 function Navbar({ page, navigate, transparent }) {
   const [drawerOpen, setDrawerOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
 
   useEffect(() => {
-    const fn = () => setScrolled(window.scrollY > 40);
-    window.addEventListener("scroll", fn);
-    return () => window.removeEventListener("scroll", fn);
+    const onScroll = () => setScrolled(window.scrollY > 40);
+    onScroll();
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
   const isTransparent = transparent && !scrolled && !drawerOpen;
-  const txtColor = isTransparent ? "#fff" : "#222";
-  const bgColor  = isTransparent ? "transparent" : "#fff";
-  const shadow   = isTransparent ? "none" : "0 2px 16px rgba(0,0,0,.07)";
-
-  const go = (key) => { navigate(key); setDrawerOpen(false); };
+  const go = (key) => {
+    navigate(key);
+    setDrawerOpen(false);
+  };
 
   return (
     <>
-      <nav style={{ position: "fixed", top: 0, left: 0, right: 0, zIndex: 100, background: bgColor, boxShadow: shadow, transition: "background .3s, box-shadow .3s" }}>
-        <div className="gh-container" style={{ display: "flex", alignItems: "center", justifyContent: "space-between", height: 64 }}>
-          {/* Logo */}
-          <button onClick={() => go("home")} style={{ background: "none", border: "none", cursor: "pointer", fontWeight: "bold", fontSize: 19, color: isTransparent ? "#fff" : PINK, letterSpacing: 0.5, fontFamily: "Georgia, serif" }}>
-            ✦ GlowHaven
+      <nav
+        className={[
+          "fixed inset-x-0 top-0 z-50 transition-all duration-300",
+          isTransparent
+            ? "bg-transparent text-white"
+            : "border-b border-black/5 bg-white/90 text-ink shadow-sm backdrop-blur-xl",
+        ].join(" ")}
+      >
+        <div className="gh-container flex h-16 items-center justify-between">
+          <button
+            onClick={() => go("home")}
+            className="font-serif text-xl font-bold tracking-wide"
+          >
+            GlowHaven
           </button>
 
-          {/* Desktop links */}
-          <div className="gh-desktop-nav" style={{ display: "flex", gap: 32 }}>
-            {NAV_PAGES.map((label, i) => (
-              <button
-                key={label}
-                className="gh-nav-link"
-                onClick={() => go(PAGE_KEYS[i])}
-                style={{
-                  color: page === PAGE_KEYS[i] ? PINK : txtColor,
-                  borderBottom: page === PAGE_KEYS[i] ? `1.5px solid ${PINK}` : "1.5px solid transparent",
-                  paddingBottom: 2,
-                }}
-              >{label}</button>
-            ))}
+          <div className="hidden items-center gap-8 md:flex">
+            {NAV_PAGES.map((label, index) => {
+              const key = PAGE_KEYS[index];
+              const active = page === key;
+              return (
+                <button
+                  key={label}
+                  onClick={() => go(key)}
+                  className={[
+                    "text-sm font-bold transition-colors",
+                    active
+                      ? "text-blush-600"
+                      : isTransparent
+                        ? "text-white/85 hover:text-white"
+                        : "text-ink/70 hover:text-ink",
+                  ].join(" ")}
+                >
+                  {label}
+                </button>
+              );
+            })}
           </div>
 
-          {/* Right actions */}
-          <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
-            <button className="gh-btn" style={{ padding: "8px 20px", fontSize: 13 }} onClick={() => go("login")}>Log In</button>
-            <button className="gh-hamburger" onClick={() => setDrawerOpen(true)}>
-              <span style={{ background: isTransparent ? "#fff" : "#333" }} />
-              <span style={{ background: isTransparent ? "#fff" : "#333" }} />
-              <span style={{ background: isTransparent ? "#fff" : "#333" }} />
+          <div className="flex items-center gap-3">
+            <button
+              className={isTransparent ? "gh-btn-soft hidden sm:inline-flex" : "gh-btn hidden sm:inline-flex"}
+              onClick={() => go("login")}
+            >
+              Log In
+            </button>
+            <button
+              onClick={() => setDrawerOpen(true)}
+              className="grid h-10 w-10 place-items-center rounded-full border border-current/20 md:hidden"
+              aria-label="Open menu"
+            >
+              <span className="flex flex-col gap-1.5">
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+                <span className="h-0.5 w-5 rounded-full bg-current" />
+              </span>
             </button>
           </div>
         </div>
       </nav>
 
-      {/* Mobile Drawer */}
       {drawerOpen && (
-        <div className="gh-drawer">
-          <div className="gh-drawer-overlay" onClick={() => setDrawerOpen(false)} />
-          <div className="gh-drawer-panel">
-            <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 32 }}>
-              <span style={{ fontWeight: "bold", fontSize: 18, color: PINK, fontFamily: "Georgia, serif" }}>✦ GlowHaven</span>
-              <button onClick={() => setDrawerOpen(false)} style={{ background: "none", border: "none", fontSize: 22, cursor: "pointer", color: "#888" }}>✕</button>
-            </div>
-            {NAV_PAGES.map((label, i) => (
+        <div className="fixed inset-0 z-[60] md:hidden">
+          <button
+            className="absolute inset-0 bg-ink/45"
+            onClick={() => setDrawerOpen(false)}
+            aria-label="Close menu"
+          />
+          <aside className="relative flex h-full w-80 max-w-[86vw] flex-col bg-white p-6 shadow-2xl">
+            <div className="mb-8 flex items-center justify-between">
+              <span className="font-serif text-xl font-bold text-blush-600">GlowHaven</span>
               <button
-                key={label}
-                onClick={() => go(PAGE_KEYS[i])}
-                style={{
-                  display: "block", width: "100%", textAlign: "left",
-                  padding: "14px 0", fontFamily: "Georgia, serif", fontSize: 16,
-                  background: "none", border: "none", borderBottom: "1px solid #f5eded",
-                  cursor: "pointer", color: page === PAGE_KEYS[i] ? PINK : "#333",
-                  fontWeight: page === PAGE_KEYS[i] ? "bold" : "normal",
-                }}
-              >{label}</button>
-            ))}
-            <button className="gh-btn" style={{ marginTop: 28, width: "100%" }} onClick={() => go("login")}>Log In</button>
-          </div>
+                onClick={() => setDrawerOpen(false)}
+                className="grid h-10 w-10 place-items-center rounded-full bg-blush-50 text-2xl text-ink/70"
+                aria-label="Close menu"
+              >
+                x
+              </button>
+            </div>
+            <div className="flex flex-col">
+              {NAV_PAGES.map((label, index) => {
+                const key = PAGE_KEYS[index];
+                return (
+                  <button
+                    key={label}
+                    onClick={() => go(key)}
+                    className={[
+                      "border-b border-black/5 py-4 text-left font-serif text-lg",
+                      page === key ? "font-bold text-blush-600" : "text-ink",
+                    ].join(" ")}
+                  >
+                    {label}
+                  </button>
+                );
+              })}
+            </div>
+            <button className="gh-btn mt-8 w-full" onClick={() => go("login")}>
+              Log In
+            </button>
+          </aside>
         </div>
       )}
     </>
